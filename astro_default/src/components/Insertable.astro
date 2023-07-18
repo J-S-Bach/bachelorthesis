@@ -1,0 +1,23 @@
+---
+const { id, inner } = Astro.props;
+---
+
+<script>
+    class Insertable extends HTMLElement {
+        constructor() {
+            super();
+
+            this.addEventListener("insert", () => {
+                this.querySelector("#insertHere").innerHTML = this.dataset.inner;
+            });
+        }
+    }
+
+    customElements.define("insertable-component", Insertable)
+</script>
+
+<insertable-component
+    id={id}
+    data-inner={inner}>
+    <div id="insertHere"/>
+</insertable-component>

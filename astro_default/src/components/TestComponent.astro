@@ -1,0 +1,40 @@
+---
+import VideoCategoryTest from "./VideoCategoryTest.astro";
+const { srcs } = Astro.props;
+import * as veryLowQuality from "../../../JSXTestVideo/media/webm/NormalQuality";
+import * as lowQuality from "../../../JSXTestVideo/media/webm/LowQuality";
+import * as normalQuality from "../../../JSXTestVideo/media/webm/NormalQuality";
+import Insertable from "./Insertable.astro";
+---
+
+<script>
+    setTimeout(() => {
+        // console.log("test");
+    }, 3000);
+</script>
+
+
+<VideoCategoryTest
+    mayDisplay={false}
+    id="veryLowQuality"
+    srcs={[
+        veryLowQuality.vid1.default,
+
+        // veryLowQuality.vid2.default, veryLowQuality.vid3.default
+    ]}
+    name="Very Low Quality"
+/>
+
+<!-- <VideoCategoryTest
+    id="lowQuality"
+    srcs={[lowQuality.vid1.default, lowQuality.vid2.default, lowQuality.vid3.default]}
+    name="Low Quality"
+    mayDisplay={false}
+/>
+
+<VideoCategoryTest
+    id="normalQuality"
+    srcs={[normalQuality.vid1.default, normalQuality.vid2.default, normalQuality.vid3.default]}
+    name="Normal Quality"
+    mayDisplay={false}
+/> -->

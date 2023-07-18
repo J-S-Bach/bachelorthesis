@@ -1,0 +1,34 @@
+{
+    "name": "jsxtestimages",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./dist/components.bundle.min.js",
+    "module": "./dist/components.bundle.min.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "vite build"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/components.bundle.min.js",
+            "require": "./dist/components.bundle.min.umd.js"
+        }
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "vite": "^4.4.4"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.0.3"
+    },
+    "peerDependencies": {
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    },
+    "browserslist": [
+        "> 0.5%",
+        "not dead"
+    ]
+}

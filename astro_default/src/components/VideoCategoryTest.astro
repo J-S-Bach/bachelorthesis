@@ -1,0 +1,90 @@
+---
+import SingleVideo from "./SingleVideo.astro";
+
+const { srcs, id, name } = Astro.props;
+---
+
+<script>
+    class VideoCategory extends HTMLElement {
+        constructor() {
+            super();
+
+            let videoTests = [];
+            let doneCounter = 0;
+            const srcs = JSON.parse(this.dataset.srcs);
+
+            srcs.map((src, i) => {
+                let doc = this.querySelector("#singleVideo" + i);
+
+                doc.addEventListener("done", e => {
+                    // @ts-ignore - push new data
+                    videoTests.push(e.detail);
+
+                    // Update innerHTML
+                    this.querySelector("tbody").innerHTML = videoTests
+                        .map(
+                            videoTest =>
+                                `<tr>
+                            <th>${src}</th>
+                            <th>${videoTest.imageLoadTimes}</th>
+                            <th>${videoTest.imageLoadTimes.reduce((vid1, vid2) => vid1 + vid2) / videoTest.imageLoadTimes.length}</th>
+                            <th>${videoTest.componentLoadTimes}</th>
+                            <th>${
+                                videoTest.componentLoadTimes.reduce((vid1, vid2) => vid1 + vid2) / videoTest.componentLoadTimes.length
+                            }</th>
+                            <th>${videoTest.succesfullyFinished}</th>
+                            </tr>
+                    `
+                        )
+                        .join("");
+
+                    doneCounter += 1;
+
+                    // When finished call custom event
+                    if (doneCounter === srcs.length) {
+                        this.dispatchEvent(
+                            new CustomEvent("categoryDone", {
+                                bubbles: true,
+                                cancelable: false,
+                                composed: true,
+                                detail: videoTests,
+                            })
+                        );
+                    }
+                });
+            });
+        }
+    }
+
+    customElements.define("video-category", VideoCategory);
+</script>
+
+<video-category
+    data-srcs={JSON.stringify(srcs)}
+    id={id}>
+    <div style={{ padding: "24px" }}>
+        <h2>{name}</h2>
+        {
+            srcs.map((src, i) => (
+                <SingleVideo
+                    src={src}
+                    amount="4"
+                    id={`singleVideo${i}`}
+                />
+            ))
+        }
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Measured Times - Image load (in ms)</th>
+                    <th>Average - Image load (in ms)</th>
+                    <th>Measured Times - Page load (in ms)</th>
+                    <th>Average - Page load (in ms)</th>
+                    <th>Contains Failure</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</video-category>

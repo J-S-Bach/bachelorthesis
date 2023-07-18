@@ -1,0 +1,90 @@
+---
+import Insertable from "./Insertable.astro";
+
+const { src, amount = "4", id, type } = Astro.props;
+---
+
+<Insertable
+    id="insertable"
+    inner={`
+        <single-video
+            data-amount=${amount}
+            id=${id}>
+            ${[...Array(parseInt(amount))].map(
+                (item, i) =>
+                    `<video
+                        id=${"video" + i}
+                        hidden>
+                        <source
+                            src=${src}
+                            type=${type}
+                        />
+                    </video>`
+            )}
+        </single-video>
+        `}
+/>
+
+<script>
+    class MeasuringVideo extends HTMLElement {
+        constructor() {
+            super();
+            const { amount } = this.dataset;
+
+            let imageLoadTimes = [];
+            let componentLoadTimes = [];
+            let hasFailure = false;
+            let doneCounter = 0;
+
+            let imageLoadStartTime = 0;
+            const componentLoadStartTime = performance.now();
+
+            const writeTimes = (withFailure = false) => {
+                const now = performance.now();
+
+                imageLoadTimes.push(now - imageLoadStartTime);
+                componentLoadTimes.push(now - componentLoadStartTime);
+                if (withFailure) {
+                    hasFailure = true;
+                }
+
+                doneCounter += 1;
+
+                if (doneCounter === parseInt(amount)) {
+                    this.dispatchEvent(
+                        new CustomEvent("done", {
+                            bubbles: true,
+                            cancelable: false,
+                            composed: true,
+                            detail: {
+                                componentLoadTimes,
+                                imageLoadTimes,
+                                succesfullyFinished: hasFailure,
+                            },
+                        })
+                    );
+                }
+            };
+
+            [...Array(parseInt(amount))].map((item, i) => {
+                const video = this.querySelector("#video" + i);
+
+                video.addEventListener("loadstart", () => {
+                    imageLoadStartTime = performance.now();
+                });
+
+                video.addEventListener("loadeddata", () => {
+                    writeTimes();
+                });
+
+                video.addEventListener("error", () => {
+                    writeTimes(true);
+                });
+            });
+        }
+    }
+
+    customElements.define("single-video", MeasuringVideo);
+
+    document.getElementById("insertable").dispatchEvent(new CustomEvent("insert", { bubbles: true, cancelable: false, composed: true }));
+</script>

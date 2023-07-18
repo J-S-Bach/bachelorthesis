@@ -1,0 +1,27 @@
+---
+import TestComponent from "../components/TestComponent.astro";
+import Video1 from "../../../JSXTest/media/720p50_parkrun_ter_small.webm"
+---
+
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/favicon.svg"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width"
+		/>
+		<meta
+			name="generator"
+			content={Astro.generator}
+		/>
+		<title>Astro test</title>
+	</head>
+	<body>
+		<TestComponent srcs={[Video1]}/>
+	</body>
+</html>
