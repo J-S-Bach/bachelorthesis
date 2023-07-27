@@ -1,0 +1,39 @@
+{
+    "name": "jsxtestvideo",
+    "version": "1.0.1",
+    "description": "",
+    "type": "module",
+    "main": "./dist/components.bundle.min.js",
+    "module": "./dist/components.bundle.min.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "node --max_old_space_size=16384 ./node_modules/vite/bin/vite.js build"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/components.bundle.min.js",
+            "require": "./dist/components.bundle.min.umd.js"
+        }
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.22.9",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@vitejs/plugin-react": "^3.0.0"
+    },
+    "dependencies": {
+        "@vitejs/plugin-legacy": "^4.1.0",
+        "rollup-plugin-node-externals": "^6.1.1",
+        "vite": "^4.4.4",
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    },
+    "peerDependencies": {
+       
+    },
+    "browserslist": [
+        "> 0.5%",
+        "not dead"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "react_next",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "workspaces": [
+        "../JSXTestVideo",
+        "../JSXTestImages"
+    ],
+    "dependencies": {
+        "jsxtestimages": "1.0.0",
+        "jsxtestvideo": "1.0.1",
+        "next": "13.4.7",
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    },
+    "browserslist": [
+        "firefox 52",
+        "chrome 49"
+    ]
+}

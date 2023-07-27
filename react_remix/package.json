@@ -1,0 +1,36 @@
+{
+    "name": "react_remix",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build": "remix build",
+        "dev": "remix dev",
+        "start": "remix-serve build",
+        "typecheck": "tsc"
+    },
+    "workspaces": [
+        "../JSXTestVideo",
+        "../JSXTestImages"
+    ],
+    "dependencies": {
+        "@remix-run/css-bundle": "^1.17.1",
+        "@remix-run/node": "^1.17.1",
+        "@remix-run/react": "^1.17.1",
+        "@remix-run/serve": "^1.17.1",
+        "isbot": "^3.6.8",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "jsxtestvideo": "1.0.1",
+        "jsxtestimages": "1.0.0"
+    },
+    "devDependencies": {
+        "@remix-run/dev": "^1.17.1"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "browserslist": [
+        "firefox 52",
+        "chrome 49"
+    ]
+}

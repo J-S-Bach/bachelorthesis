@@ -1,0 +1,38 @@
+{
+    "name": "react_gatsby",
+    "version": "1.0.0",
+    "private": true,
+    "description": "react_gatsby",
+    "author": "J-S-Bach",
+    "keywords": [
+        "gatsby"
+    ],
+    "scripts": {
+        "develop": "gatsby develop",
+        "start": "gatsby develop",
+        "dev": "gatsby develop",
+        "build": "gatsby build",
+        "serve": "gatsby serve -H 192.168.178.28 -p 3000",
+        "clean": "gatsby clean"
+    },
+    "dependencies": {
+        "gatsby": "^5.11.0",
+        "gatsby-plugin-image": "^3.11.0",
+        "gatsby-plugin-polyfill-io": "^1.1.0",
+        "gatsby-plugin-sharp": "^5.11.0",
+        "gatsby-source-filesystem": "^5.11.0",
+        "gatsby-transformer-sharp": "^5.11.0",
+        "jsxtestimages": "1.0.0",
+        "jsxtestvideo": "1.0.1",
+        "react": "18.2.0",
+        "react-app-polyfill": "^3.0.0",
+        "react-dom": "18.2.0"
+    },
+    "workspaces": [
+        "../JSXTestVideo",
+        "../JSXTestImages"
+    ],
+    "browserslist": [
+        "firefox 52"
+    ]
+}
